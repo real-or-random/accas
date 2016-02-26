@@ -1,0 +1,29 @@
+input           : create
+network         : Bitcoin mainnet
+netcode         : BTC
+wallet key      : xprv9s21ZrQH143K2Y7xwoE46uravELtSGtvkLRAKa35zRPxZaRB7JbhviUvGZi6Ru\
+                    rQcNnfPCU8bdjUgNM8C9L9FPyRRKpT36FD9tuTeTVqFFg
+public version  : xpub661MyMwAqRbcF2CS3pm4U3oKUGBNqjcn7ZLm7xShYkvwSNkKequxUWoQ7qWKG3\
+                    1nkco7PvyyCJYDvwCJZKpsvVfG6PxnEzV9p66FfRt5Q3T
+tree depth      : 0
+fingerprint     : 26b8c53e
+parent f'print  : 00000000
+child index     : 0
+chain code      : 301472049dd9e65e1e385145a2edcc1a58b3738110cd84f2778d1151bd780d66
+private key     : yes
+secret exponent : 80556684945530380731728155681445877180116293908513621893537378109511993073295
+ hex            : b21977c8ca1cbb55f0a3effd9966e3d5c9588688fa02bf7a0d2af7b6366f1e8f
+wif             : L3BuubvRmbaMtWhWDZdihLkpoWSgSBSnZ1meWLgANBF7mwcCYWZd
+ uncompressed   : 5KAitnyWdPLLgmLbiMzFtHFuyJYeUufU5zGZ4UZtWik5FoPJwtJ
+public pair x   : 10421246664480591404370710593591107436222890454191537060581770186715913352860
+public pair y   : 5732089771564548274287715404092103254913254609296880336384197872331899052793
+ x as hex       : 170a377241d94a5f4c85f199c796c5a9f9f56b3e2d6aea18be9188d13131769c
+ y as hex       : cac3f725eab0091405eafb92b59cde9d0179d011ca4b760282279899db8a2f9
+y parity        : odd
+key pair as sec : 03170a377241d94a5f4c85f199c796c5a9f9f56b3e2d6aea18be9188d13131769c
+ uncompressed   : 04170a377241d94a5f4c85f199c796c5a9f9f56b3e2d6aea18be9188d13131769c\
+                    0cac3f725eab0091405eafb92b59cde9d0179d011ca4b760282279899db8a2f9
+hash160         : 26b8c53e48e6623b9e377ef6400529436730ab93
+ uncompressed   : 3807b2355906a5e18cda0cbc39a57500c4eff4b5
+Bitcoin address : 14Xk2NKu8etzVdXYT5hMWWakQaC1MJrngE
+ uncompressed   : 167G4UmWe58boNvHakDhxNrNeHiQMgAnLo
