@@ -120,8 +120,8 @@ const ChameleonHash::hash_t AuthenticatorTest::ch1 = {
 };
 
 const Authenticator::ct_t AuthenticatorTest::ct = {
+    // FIXME We always set the first 8 bytes even though CT_LEN can be configured.
     0x41, 0x04, 0xff, 0x17, 0x5f, 0xa9, 0x17, 0xab
-//    0x10, 0xfa, 0x0a, 0x2a, 0x33, 0x27, 0x19, 0x19
 };
 
 random_device AuthenticatorTest::rd;

@@ -27,20 +27,24 @@
 #include "node.h"
 #include <assert.h>
 
-Node::Node(const Authenticator::ct_t& ct) : level(Authenticator::DEPTH)
+Node::Node(const Authenticator::ct_t& ct) : level(Authenticator::DEPTH), fromLeft({})
 {
-    // parse as big endian number
-    fromLeft = ((uint64_t) ct[0] << 56) | ((uint64_t) ct[1] << 48) | ((uint64_t) ct[2] << 40) | ((uint64_t) ct[3] << 32)
-    | ((uint64_t) ct[4] << 24) | ((uint64_t) ct[5] << 16) | ((uint64_t) ct[6] << 8) | (uint64_t) ct[7];
+    // Parse as big endian number
+    for (size_t i = 0; i < Authenticator::CT_LEN; i++) {
+        fromLeft[LIMBS - 1 - i/sizeof(limb_t)]
+            |= (limb_t) ct[Authenticator::CT_LEN-i-1] << (i % sizeof(limb_t) * 8);
+    }
 }
 
-Node::Node(unsigned char level, uint64_t fromLeft) : level(level), fromLeft(fromLeft) { }
+Node::Node(size_t level, uint64_t fromLeft) : level(level), fromLeft({})
+{
+    this->fromLeft.back() += fromLeft;
+}
 
 Node Node::leftChildOfRoot()
 {
     return Node(1, 0);
 }
-
 
 bool Node::moveToParent()
 {
@@ -48,8 +52,22 @@ bool Node::moveToParent()
         return false;
     }
     level--;
-    fromLeft >>= 1;
-    assert(!isRoot() || fromLeft == 0);
+
+    // fL >>= 1, where fL is the integer represented by the bytes of fromLeft
+    for (auto it = fromLeft.end() - 1; it != fromLeft.begin() ; it--) {
+        *it = (*it >> 1) | ((*(it-1) & 1) << (8*sizeof(limb_t) - 1));
+    }
+    fromLeft[0] >>= 1;
+
+#ifndef NDEBUG
+    {
+        limb_t allor = 0;
+        for (auto limb : fromLeft) {
+            allor |= limb;
+        }
+        assert(!isRoot() || allor == 0);
+    }
+#endif
     return true;
 }
 
@@ -58,7 +76,7 @@ bool Node::moveToSibling()
     if (isRoot()) {
         return false;
     }
-    fromLeft ^= 1;
+    fromLeft.back() ^= 1;
     return true;
 }
 
@@ -67,7 +85,7 @@ bool Node::isLeftChild()
     if (isRoot()) {
         throw std::logic_error("Root node is not a child.");
     }
-    return !(fromLeft & 1);
+    return !(fromLeft.back() & 1);
 }
 
 bool Node::isRoot()
@@ -77,9 +95,12 @@ bool Node::isRoot()
 
 void Node::toBytes(Prf::data_t& d)
 {
-    d.resize(1+8);
+    d.resize(sizeof level + sizeof(limb_t) * LIMBS);
     d.push_back(level);
-    for (int i = 1; i < 1+8; i++) {
-        d.push_back(fromLeft >> ((8-i)*8) & 0xFF);
+    for (auto &limb : fromLeft) {
+        // for i = sizeof(limb_t) - 1, ..., 0
+        for (size_t i = sizeof(limb_t) - 1; i-- > 0; ) {
+            d.push_back((limb >> (i*8)) & 0xFF);
+        }
     }
 }

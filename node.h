@@ -29,11 +29,12 @@
 
 #include "authenticator.h"
 #include "prf.h"
+#include <array>
 
 class Node
 {
 public:
-    // constructs a leaf node
+    // construct a leaf node
     Node(const Authenticator::ct_t& ct);
     static Node leftChildOfRoot();
 
@@ -45,9 +46,16 @@ public:
     void toBytes(Prf::data_t& d);
 
 private:
-    unsigned char level;
-    uint64_t fromLeft;
-    Node(unsigned char level, uint64_t fromLeft);
+    // Level 0 is the level of the root.
+    size_t level;
+
+    // The code is fully parametric in limb_t.
+    typedef uint64_t limb_t;
+    static const size_t LIMBS = (Authenticator::CT_LEN + sizeof(limb_t) - 1) / sizeof(limb_t);
+    // Big-endian representation of number of other nodes on the same level left of this node.
+    std::array<uint64_t, LIMBS> fromLeft = {};
+    Node(size_t level, uint64_t fromLeft);
 };
+
 
 #endif // NODE_H
