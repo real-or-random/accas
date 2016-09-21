@@ -50,9 +50,9 @@ public:
     static const ChameleonHash::hash_t ch1;
     static const Authenticator::ct_t ct;
 
-    static array<ChameleonHash::mesg_t, n> xs;
-    static array<ChameleonHash::rand_t, n> rs;
-    static array<Authenticator::ct_t, n> cts;
+    static vector<ChameleonHash::mesg_t> xs;
+    static vector<ChameleonHash::rand_t> rs;
+    static vector<Authenticator::ct_t> cts;
 
     static void SetUpTestCase() {
         cout << "Random seed: " << seed << endl;
@@ -121,14 +121,15 @@ const ChameleonHash::hash_t AuthenticatorTest::ch1 = {
 
 const Authenticator::ct_t AuthenticatorTest::ct = {
     0x41, 0x04, 0xff, 0x17, 0x5f, 0xa9, 0x17, 0xab
+//    0x10, 0xfa, 0x0a, 0x2a, 0x33, 0x27, 0x19, 0x19
 };
 
 random_device AuthenticatorTest::rd;
 random_device::result_type AuthenticatorTest::seed = AuthenticatorTest::rd();
 mt19937_64 AuthenticatorTest::gen(seed);
-array<ChameleonHash::mesg_t, AuthenticatorTest::n> AuthenticatorTest::xs;
-array<ChameleonHash::rand_t, AuthenticatorTest::n> AuthenticatorTest::rs;
-array<Authenticator::ct_t, AuthenticatorTest::n> AuthenticatorTest::cts;
+vector<ChameleonHash::mesg_t> AuthenticatorTest::xs(n);
+vector<ChameleonHash::rand_t> AuthenticatorTest::rs(n);
+vector<Authenticator::ct_t> AuthenticatorTest::cts(n);
 
 TEST_F(AuthenticatorTest, ChSinglePk) {
     ChameleonHash ch(pk);
@@ -281,7 +282,7 @@ TEST_F(AuthenticatorTest, AuthenticatorExtractSimple) {
 
 TEST_F(AuthenticatorTest, AuthenticatorCorrectRandomAndBenchmark) {
     Authenticator acca(sk);
-    std::array<Authenticator::token_t, n> ts;
+    std::vector<Authenticator::token_t> ts(n);
     cout << n << " iterations " << endl;
     {
         clock_t begin = clock();
