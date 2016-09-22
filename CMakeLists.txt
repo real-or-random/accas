@@ -27,6 +27,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
+set(ACCA_CT_LEN 8
+    CACHE STRING "Length of a assertion context in bytes. This value should be at least 8.")
+add_definitions(-DACCA_CT_LEN=${ACCA_CT_LEN})
+
 # tell libsecp256k1 to use its config.h file
 add_definitions(-DHAVE_CONFIG_H)
 
@@ -38,6 +42,10 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 find_package(GMP REQUIRED)
 include_directories(${GMP_INCLUDE_DIR})
+
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE release)
+endif(NOT CMAKE_BUILD_TYPE)
 
 add_executable(authenticatortest test/authenticatortest.cpp chameleonhash.cpp authenticator.cpp prf.cpp node.cpp)
 

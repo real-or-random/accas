@@ -33,9 +33,11 @@
 class Authenticator
 {
 public:
-    static const size_t CT_LEN = 64/8;
-    // depth is number of non-root levels
-    static const size_t DEPTH  = CT_LEN*8;
+    // Length of context in bytes. This is configurable via the ACCA_CT_LEN variable in cmake.
+    static const size_t CT_LEN = ACCA_CT_LEN;
+
+    // Depth is number of non-root levels.
+    static const size_t DEPTH = CT_LEN * 8;
 
     // Authentication tokens are 4160 bytes long. By compressing the sign bytes into bit vectors,
     // we could additionally save 60 bits.
