@@ -34,7 +34,7 @@ const unsigned char Prf::R = 'R';
 
 Prf::Prf(Prf::key_t key) : key(key) { }
 
-Prf::Prf(ChameleonHash::sk_t dsk, bool extract) : key(key) {
+Prf::Prf(ChameleonHash::sk_t dsk, bool extract) {
     if (extract) {
         secp256k1_sha256_t hash;
         secp256k1_sha256_initialize(&hash);
