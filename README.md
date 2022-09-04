@@ -47,6 +47,7 @@ source code of libsecp256k1 is currently necessary to build the project.
 ## Building and Usage
 ```
 $ cd secp256k1
+$ ./autogen.sh
 $ ./configure
 $ cd ..
 $ mkdir build
