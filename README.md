@@ -46,6 +46,9 @@ source code of libsecp256k1 is currently necessary to build the project.
 
 ## Building and Usage
 ```
+$ cd secp256k1
+$ ./configure
+$ cd ..
 $ mkdir build
 $ cd build
 $ cmake ..
@@ -65,6 +68,6 @@ To run tests and benchmarks, run `./authenticatortest`.
 The `Authenticator` class is provided as an interface to be used in other projects.
 
 ## Copyright and License
-Copyright 2015 Tim Ruffing <tim.ruffing@mmci.uni-saarland.de>
+Copyright 2015 Tim Ruffing
 
 The project is licensed under the MIT License, see LICENSE.txt
