@@ -2,11 +2,11 @@
 
 A proof-of-concept implementation of the accountable assertions scheme
 introduced in the research paper
-[Liar, Liar, Coins on Fire! — Penalizing Equivocation By Loss Of Bitcoins](https://crypsys.mmci.uni-saarland.de/projects/PenalizingEquivocation/penalizing.pdf) (22nd Conference on Computer and
-Communications Security, ACM CCS 2015).
+[Liar, Liar, Coins on Fire! — Penalizing Equivocation By Loss Of Bitcoins](https://raw.githubusercontent.com/real-or-random/accas/master/paper.pdf)
+(22nd Conference on Computer and Communications Security, ACM CCS 2015).
 
 ## Functionality
-Accountable assertions are a cryptographc primitive similar to digital
+Accountable assertions are a cryptographic primitive similar to digital
 signatures. Instead of only authenticating a message, they allow a user
 holding a secret *assertion key* to assert a *statement* in a *context*.
 The user should only assert one unique statement in each context. The
@@ -25,7 +25,7 @@ Bitcoins, the equivocator can be forced to lose these Bitcoins to a
 predetermined party.
 
 See
-[the paper](https://crypsys.mmci.uni-saarland.de/projects/PenalizingEquivocation/penalizing.pdf)
+[the paper](https://raw.githubusercontent.com/real-or-random/accas/master/paper.pdf)
 for a full description of the functionality provided by accountable assertions.
 
 ## Technical Details
@@ -61,7 +61,7 @@ You can additionally pass the following options to `cmake`:
  * `-DACCA_CT_LEN=n` to set the size of a supported assertion context to `n`
    bytes. This parameter influences the running time and the probability that
    any assertion does not succeed; see
-   [the paper](https://crypsys.mmci.uni-saarland.de/projects/PenalizingEquivocation/penalizing.pdf)
+   [the paper](https://raw.githubusercontent.com/real-or-random/accas/master/paper.pdf)
    for details. The default is 8 bytes.
 
 To run tests and benchmarks, run `./authenticatortest`.
@@ -72,3 +72,6 @@ The `Authenticator` class is provided as an interface to be used in other projec
 Copyright 2015 Tim Ruffing
 
 The project is licensed under the MIT License, see LICENSE.txt
+
+The above copyright notice and licensing statement does not apply to the
+[paper.pdf](paper.pdf) file. See the first page thereof for details.
